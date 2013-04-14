@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<script type="text/javascript">
+
+   
+    function getHttpObject(){
+        var xmlhttp = null;
+        if (window.XMLHttpRequest){xmlhttp=new XMLHttpRequest();}
+        else if (window.ActiveXObject){xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
+        else {alert("XMLHTTP! yi Tarayiciniz desteklemiyor... ");}
+        return xmlhttp;
+    }   
+
+   
+    function populateState(str){
+        xmlhttp = getHttpObject();
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4){
+                ajxfrm.ilce.value=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","AjaxTestServlet?sehir="+str,true);
+        xmlhttp.send(null);
+    }
+
+
+</script>
+</HEAD>
+<BODY>
+<form name="ajxfrm">
+    <table>
+       
+        <tr>
+            <td>sehir</td><td><input type="text" name="sehir" value=""/></td>
+        </tr>
+       
+     
+        <tr>
+            <td>ilce</td><td><input type="text" name="ilce" value="" onfocus="populateState(ajxfrm.sehir.value);"/></td>
+        </tr>
+    </table>
+
+</form>
+</BODY>
+</HTML>
